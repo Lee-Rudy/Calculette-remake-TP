@@ -13,13 +13,15 @@ import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 
 import calcul.Calcul;
+import calcul.InvalidCoefficientException;
+import calcul.Validator;
 
 public class Uinterface extends JFrame 
 {
-    public JTextField champ_a = new JTextField(10);
-    public JTextField champ_b = new JTextField(10);
-    public JTextField champ_c = new JTextField(10);
-    public JLabel message_user = new JLabel("résultat :");
+    public JTextField champA = new JTextField(10);
+    public JTextField champB = new JTextField(10);
+    public JTextField champC = new JTextField(10);
+    public JLabel messageUser = new JLabel("résultat :");
 
 //----------------------------------------------------------------------------
     //window propriety
@@ -28,19 +30,19 @@ public class Uinterface extends JFrame
         super("Calcul d'équation de second degré");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        message_user.setHorizontalAlignment(SwingConstants.CENTER);
-        add(message_user, BorderLayout.NORTH);
-        // add(message_user, BorderLayout.SOUTH);
+        messageUser.setHorizontalAlignment(SwingConstants.CENTER);
+        add(messageUser, BorderLayout.NORTH);
+        // add(messageUser, BorderLayout.SOUTH);
 
 
         //3 champs : a, b, c
         JPanel center = new JPanel(new GridLayout(3, 2, 6, 6));
         center.add(new JLabel("a :"));
-        center.add(champ_a);
+        center.add(champA);
         center.add(new JLabel("b :"));
-        center.add(champ_b);
+        center.add(champB);
         center.add(new JLabel("c :"));
-        center.add(champ_c);
+        center.add(champC);
         add(center, BorderLayout.CENTER);
 
         //bouton action
@@ -69,32 +71,39 @@ public class Uinterface extends JFrame
     {
         try 
         {
-            int a = parseInt(champ_a.getText());
-            int b = parseInt(champ_b.getText());
-            int c = parseInt(champ_c.getText());
+            double a = Validator.parseAndValidateNumber(champA.getText(), "a");
+            double b = Validator.parseAndValidateNumber(champB.getText(), "b");
+            double c = Validator.parseAndValidateNumber(champC.getText(), "c");
+
+            Validator.validateA(a);
 
             Calcul calcul = new Calcul(a, b, c);
             double[] resultat = calcul.calculSeconddegre();
 
             if (resultat == null) 
             {
-                message_user.setText("aucune solution (delta < 0)");
+                messageUser.setText("Aucune solution (delta < 0)");
             } 
             else if (resultat.length == 1) 
             {
-                message_user.setText("une seule solution : x = " + resultat[0]);
+                messageUser.setText("Une seule solution : x = " + resultat[0]);
             } 
             else 
             {
-                message_user.setText("deux solutions : x1 = " + resultat[1] + " , x2 = " + resultat[2]);
+                messageUser.setText("Deux solutions : x1 = " + resultat[1] + " , x2 = " + resultat[2]);
             }
-
         } 
-        catch (NumberFormatException ex) 
+        catch (InvalidCoefficientException ex) 
         {
-            message_user.setText("Mauvaise saisie, entrez des nombres valides");
+            messageUser.setText("Erreur : " + ex.getMessage());
+        }
+        catch (Exception ex) 
+        {
+            messageUser.setText("Erreur inattendue.");
+            ex.printStackTrace();
         }
     }
+
         
 // -----------------------------------------------------------------------------
 
