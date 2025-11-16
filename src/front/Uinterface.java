@@ -12,7 +12,7 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 
-import back.Calcul;
+import calcul.Calcul;
 
 public class Uinterface extends JFrame 
 {
