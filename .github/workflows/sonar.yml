@@ -9,7 +9,7 @@ on:
 
 jobs:
   build:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
@@ -25,8 +25,8 @@ jobs:
 
       - name: Compile Java files
         run: |
-          mkdir -p out
-          javac -d out src/**/*.java
+          mkdir out
+          javac -d out src/back/*.java src/front/*.java src/Main.java
 
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@v2
