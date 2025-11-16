@@ -6,6 +6,7 @@ public class Calcul
     private double champA;
     private double champB;
     private double champC;
+    private double delta;
 
     public Calcul(double champA, double champB, double champC) 
     {
@@ -14,49 +15,61 @@ public class Calcul
         this.champC = champC;
     }
 
+    // champ A
     public double getA() 
-    {
-        return champA;
+    { 
+        return champA; 
     }
     public void setA(double champA) 
-    {
-        this.champA = champA;
+    { 
+        this.champA = champA; 
     }
-    public double getB() {
-        return champB;
+    // champ B
+    public double getB() 
+    { 
+        return champB; 
     }
     public void setB(double champB) 
-    {
-        this.champB = champB;
+    { 
+        this.champB = champB; 
     }
+    //Chmap C
     public double getC() 
-    {
-        return champC;
+    { 
+        return champC; 
     }
     public void setC(double champC) 
-    {
-        this.champC = champC;
+    { 
+        this.champC = champC; 
     }
-    
-    public double[] calculSeconddegre()
-    {
-        double delta = champB*champB-(4*champA*champC);
+    // Delta
+    public double getDelta() 
+    { 
+        return delta; 
+    }
 
-        if(delta>0)
+
+    //Fonctions
+    //calcul
+    public double[] calculSeconddegre() 
+    {
+        // Calcul du discriminant
+        delta = champB * champB - (4 * champA * champC);
+
+        if (delta > 0) 
         {
-            double solution1 = (-champB+Math.sqrt(delta))/(2.0*champA);
-            double solution2 = (-champB-Math.sqrt(delta))/(2.0*champA);
-            System.out.println("deux solutions reels : x1 = " + solution1 + ", x2 = " + solution2);
-            return new double[] {delta, solution1, solution2};
-        } else if(delta==0)
+            double r1 = (-champB + Math.sqrt(delta)) / (2 * champA);
+            double r2 = (-champB - Math.sqrt(delta)) / (2 * champA);
+            return new double[] { r1, r2 };
+        }
+        else if (delta == 0) 
         {
-            double solution = -champB/2.0*champA;
-            System.out.println("une seule solution reelle : x = " + solution);
-            return new double[] {delta,solution};
-        } else
+            double r = -champB / (2 * champA);
+            return new double[] { r };
+        }
+        else 
         {
-            System.out.println("aucune solution (delta < 0)");
-             return null;
+            return null; 
         }
     }
 }
