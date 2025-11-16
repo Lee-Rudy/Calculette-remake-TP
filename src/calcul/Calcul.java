@@ -3,44 +3,44 @@ package calcul;
 public class Calcul 
 {
 
-    private int champA;
-    private int champB;
-    private int champC;
+    private double champA;
+    private double champB;
+    private double champC;
 
-    public Calcul(int champA, int champB, int champC) 
+    public Calcul(double champA, double champB, double champC) 
     {
         this.champA = champA;
         this.champB = champB;
         this.champC = champC;
     }
 
-    public int getA() 
+    public double getA() 
     {
         return champA;
     }
-    public void setA(int champA) 
+    public void setA(double champA) 
     {
         this.champA = champA;
     }
-    public int getB() {
+    public double getB() {
         return champB;
     }
-    public void setB(int champB) 
+    public void setB(double champB) 
     {
         this.champB = champB;
     }
-    public int getC() 
+    public double getC() 
     {
         return champC;
     }
-    public void setC(int champC) 
+    public void setC(double champC) 
     {
         this.champC = champC;
     }
     
     public double[] calculSeconddegre()
     {
-        int delta = champB*champB-(4*champA*champC);
+        double delta = champB*champB-(4*champA*champC);
 
         if(delta>0)
         {
