@@ -22,7 +22,4 @@ jobs:
         distribution: 'temurin'
 
     - name: Compile Java files
-      run: javac -d out calcul/Calcul.java uinterface/Uinterface.java
-      
-    - name: Run Main class
-      run: java -cp out uinterface/Uinterface
+      run: javac src/**/*.java 
